@@ -1,0 +1,88 @@
+body{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	line-height: 1.5;
+	padding: 0;
+	margin: 0;
+	background-color: #f4f4f4;
+}
+
+.container{
+	width: 80%;
+	margin: auto;
+	overflow: hidden;
+}
+
+header{
+	background: #35424a;
+	color: #ffffff;
+	padding-top: 30px;
+	border-bottom: #000000 2px solid;
+}
+
+header a{
+	color: #ffffff;
+	text-decoration: none;
+	font-size: 16px;
+	text-align: center;
+}
+
+header ul{
+	margin:0;
+	padding:0;
+}
+
+header li{
+	float: right;
+	display: inline;
+	padding: 75px 0 0 20px;
+}
+
+header #logo img{
+	float: left;
+	height: 100px;
+	width: 120px;
+	padding-bottom: 5px;
+}
+
+header nav{
+	float: right;
+}
+
+header a:hover{
+	color: #cccccc;
+	font-weight: bold;
+}
+
+#welcome{
+	min-height: 400px;
+	background-image: url('../IMG/homeschool.jpg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size:cover;
+	text-align: center;
+	color: #000000;
+}
+
+#welcome h1{
+	margin-top: 100px;
+	font-size: 55px;
+	margin-bottom: -40px;
+}
+
+#welcome h2{
+	font-size: 40px;
+	margin-bottom: 10px;
+}
+
+#welcome p{
+	font-size: 20px;
+}
+
+footer{
+	padding: 2px 2px 2px 2px;
+	color: #ffffff;
+	margin-left: 2px;
+	background-color: #cccccc
+}
+
