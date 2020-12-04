@@ -68,10 +68,10 @@ WSGI_APPLICATION = 'StuDash.wsgi.application'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST = ''
 EMAIL_HOST_USER = 'apikey'
 DEFAULT_FROM_EMAIL = 'orteach123@gmail.com'
-EMAIL_HOST_PASSWORD = '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'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
