@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     # Application apps
     "main",
     "accounts",
+    "forumMessages",
+    "forumMessages.apps.ForumMessagesConfig",
 ]
 
 MIDDLEWARE = [
