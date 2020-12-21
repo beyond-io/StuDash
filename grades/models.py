@@ -8,31 +8,45 @@ class Course (models.Model):
     course_name = models.CharField(max_length=50)
     credinitials = models.IntegerField(default=2)
 
+    @classmethod
+    def addCourse(cls, course_name, credinitials):
+        newCourse = Course()
+        newCourse.course_name = course_name
+        newCourse.credinitials = credinitials
+        newCourse.save()
+        return newCourse
+
+    @classmethod
+    def removeCourse(cls, courseID):
+        Course.objects.filter(id=courseID).delete()
+        pass
+
+
+class Semester(models.TextChoices):
+    Winter = 'A',
+    Spring = 'B',
+    Summer = 'C'
+
 
 class Grade(models.Model):
-    SEMESTER_NAME = (
-        ('A', 'Winter'),
-        ('B', 'Spring'),
-        ('C', 'Summer'),
-    )
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
-                             related_name='%(class)s_student', null=True, blank=True)
-    course = models.ForeignKey(Course, on_delete=models.RESTRICT, null=True, blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.RESTRICT)
     grade = models.IntegerField(default=0)
-    semester = models.CharField(max_length=1, choices=SEMESTER_NAME)
+    semester = models.CharField(max_length=1, choices=Semester.choices)
     year = models.IntegerField(default=0)
 
     @classmethod
     def addGradeUserCourse(cls, user, courseID, grade, semester, year):
-        newGrade = Grade.object.create()
+        newGrade = Grade()
         newGrade.user = user
         newGrade.course = courseID
         newGrade.grade = grade
         newGrade.semester = semester
         newGrade.year = year
+        newGrade.save()
         return newGrade
 
     @classmethod
-    def removeCourse(cls, courseID):
-        Course.object.filter(id=courseID).delete()
+    def removeGrade(cls, gradeID):
+        Grade.objects.filter(id=gradeID).delete()
         pass
