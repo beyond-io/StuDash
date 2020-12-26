@@ -1,0 +1,57 @@
+{% extends 'layouts/default/page.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+
+
+<h1>Grades List</h1>
+<p>Here you can see a list of your grade associated to a course and calculate your GPA</p> 
+<p>Enter to add a grade click the Add Grade button </p>
+<p>To clculate your GPA click the GPA buttn </p>
+
+<br>
+<h4>Add new grade</h4>
+<div>
+    <form method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form %}     
+        <input type="submit" value="Add grade"/>
+    </form>
+</div>
+<br>
+<table style="width:100%">
+    <tr>
+        <th>Course</th>
+        <th>Grade</th> 
+        <th>Semester</th>
+        <th>Year</th>
+      </tr>
+    <tbody>
+    {% for grade in grades %}
+     <tr>
+         <td>{{grade.course.course_name}} </td>
+         <td>{{grade.grade}} </td>
+         <td>{{grade.semester}} </td>
+         <td>{{grade.year}} </td>
+     </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<br>
+
+<br>
+<div>
+    <p>To calculate you GPA press the button: </p>
+    <button onclick="myFunction()">Calculate GPA</button>
+    <p id="demo"></p>
+    <br>
+    <script>
+        function myFunction() {
+        document.getElementById("demo").innerHTML = {{ GPA }};
+        }
+    </script>       
+</div>
+    
+{% endblock %}

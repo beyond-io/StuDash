@@ -48,6 +48,11 @@
         <ul class="navbar-nav">
           {% if request.user.is_authenticated %}
           <li class="nav-item dropdown">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'grades' %}">
+              My grades
+            </a> 
+          </li>
             <a
               class="nav-link dropdown-toggle"
               href="#"

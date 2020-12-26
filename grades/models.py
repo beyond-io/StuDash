@@ -8,6 +8,9 @@ class Course (models.Model):
     course_name = models.CharField(max_length=50)
     credinitials = models.IntegerField(default=2)
 
+    def __str__(self):
+        return self.course_name
+
     @classmethod
     def addCourse(cls, course_name, credinitials):
         newCourse = Course()
