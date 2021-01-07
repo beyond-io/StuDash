@@ -52,7 +52,7 @@ class TestViews(TestCase):
 
     def test_bookmarks_list_for_user(self):
         '''test if bookmarks list belongs to current user'''
-        user_login = self.client.login(username='Ido', password='123456')
+        self.client.login(username='Ido', password='123456')
         response = self.client.get(self.create_url)
         assert (b'https://www.ynet.co.il') in response.content
         assert response.status_code == 200
