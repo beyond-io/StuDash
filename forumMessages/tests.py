@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 user = User(username='johndoe', password='secret')
-testMessage1 = Message.addMessage(user=user, text="Lorem ipsum dolor sit amet", categories=None)
+testMessage1 = Message.addMessage(user=user, text="Lorem ipsum dolor sit amet")
 # Created a global variable testMessage1 - in order to add it in 1 func and delete it in another func
 
 
