@@ -2,38 +2,22 @@
 
 {% load bootstrap4 %}
 {% load i18n %}
+{% load render_table from django_tables2 %} 
 
 {% block content %}
 
 <div>
     <form method="POST">
-        {% bootstrap_form form_newMessage %}
+        {% bootstrap_form form %}
         {% csrf_token %}
         <button class="btn btn-primary">{% trans 'Write a new message' %}</button>
     </form>
+        <button class="btn btn-primary" style="margin-top:20px">
+            <a style="color:#ffff" href="{% url 'forumMessages:view_categories' %}">{% trans 'Add new category' %}</a>
+        </button>
 </div>
 
-<table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">Date</th>
-        <th scope="col">Author</th>
-        <th scope="col">Content</th>
-        <th scope="col"><a href="categorylist.html">Categories</a></th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for message in messages %}  
-      <tr>
-        <td>{{message.date}}</td>
-        <td>{{message.user}}</td>
-        <td>{{message.text}}</td>
-        <td>{{message.category}}</td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
 
-  <div class="m-5">{% render_table table %}</div>
+  <div class="m-5">{% render_table messages %}</div>
 
 {% endblock %}

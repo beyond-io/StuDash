@@ -8,11 +8,15 @@ def ViewMessages(request):
     if request.method == "POST":
         form = MessageForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect(ViewMessages)
+            msg = Message.objects.create(
+                user=request.user,
+                date=form.cleaned_data["date"],
+                text=form.cleaned_data["text"])
+            msg.categories.add(form.cleaned_data["categories"])
+            return redirect("forumMessages:view_messages")
     else:
         form = MessageForm()
-    return render(request, 'forumMessages/messagelist.html', {'messages': messages, 'form': form, })
+    return render(request, 'messagelist.html', {'messages': messages, 'form': form, })
 
 
 def ViewCategories(request):
@@ -21,7 +25,7 @@ def ViewCategories(request):
         form = CategoryForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(ViewCategories)
+            return redirect("forumMessages:view_messages")
     else:
         form = CategoryForm()
-    return render(request, 'forumMessages/categorylist.html', {'categories': categories, 'form': form, })
+    return render(request, 'categorylist.html', {'categories': categories, 'form': form, })

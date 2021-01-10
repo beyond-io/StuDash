@@ -23,13 +23,20 @@ class Migration(migrations.Migration):
             for name in category_test_data:
                 Category(name=name).save()
 
+        user1 = User.objects.create_user(username='Ido2', password='123456789')
+        user2 = User.objects.create_user(username='Amit2', password='12345')
+        category1 = Category.objects.create(name='Course_Related')
+        category2 = Category.objects.create(name='General_discussions')
         message_test_data = [
-            (User(UserName='a'), timezone.now, 'Lorem ipsum', Category(name='Course_Related')),
-            (User(UserName='b'), timezone.now, 'Dolor sit amet', Category(name='General_discussions')),
+            (user1, timezone.now, 'Lorem ipsum', category1),
+            (user2, timezone.now, 'Dolor sit amet', category2),
         ]
         with transaction.atomic():
-            for user, date, text, categories in message_test_data:
-                Message(user=user, date=date, text=text, categories=categories).save()
+            for user, date, text, category in message_test_data:
+                msg = Message(user=user, text=text)
+                msg.save()
+                msg.categories.add(category)
+
 
     operations = [
         migrations.RunPython(generate_data)
