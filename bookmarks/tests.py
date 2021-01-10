@@ -3,6 +3,8 @@ from django.db.models.query import QuerySet
 from bookmarks.models import Bookmark
 from django.contrib.auth.models import User
 from grades.models import Course
+from django.urls import reverse
+from django.test import TestCase, Client
 
 
 @pytest.mark.django_db
@@ -41,3 +43,17 @@ class TestBookmark:
             (2, 'https://www.facebook.com', 'Facebook'),
             (2, 'https://www.facebook.com', 'Facebook')
         ]
+
+
+class TestViews(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.create_url = reverse('bookmarks:create')
+
+    def test_bookmarks_list_for_user(self):
+        '''test if bookmarks list belongs to current user'''
+        self.client.login(username='Ido', password='123456')
+        response = self.client.get(self.create_url)
+        assert (b'https://www.ynet.co.il') in response.content
+        assert response.status_code == 200
+        self.assertTemplateUsed(response, 'bookmarks/bookmarks.html')
