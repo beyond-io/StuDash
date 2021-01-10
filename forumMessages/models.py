@@ -9,6 +9,17 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    @classmethod
+    def newCategory(cls, categoryName):
+        newCat = Category.objects.create()
+        newCat.name = categoryName
+        newCat.save()
+        return newCat
+
+    @classmethod
+    def getCategories(cls):
+        return cls.objects.order_by('-id')
+
 
 class Message(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -39,4 +50,3 @@ class Message(models.Model):
         self.categories.add(Category.objects.filter(name=categoryName))
         self.save()
         pass
-
